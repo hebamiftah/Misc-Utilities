@@ -4,11 +4,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PhoneNumber {
+    private String numberType;
     private String number;          // Data Field of Number
 
     // Constructor
-    public PhoneNumber(String number){
+    public PhoneNumber(String number, String numberType) {
         this.number = number;
+        this.numberType = numberType;
+    }
+
+    public PhoneNumber(String number){
+        this(number, "");
     }
 
     // will return area code
@@ -43,8 +49,12 @@ public class PhoneNumber {
     }
 
     public String toString(){
-        return number;
+        if (numberType.equals("")) {
+            return number;
+        }
+        return numberType + ": " + number;
     }
+
     // checking if equal or not
     public boolean equals(PhoneNumber other){
         boolean check = number.equals(other.number);
@@ -52,10 +62,10 @@ public class PhoneNumber {
     }
     // for reading data of PhoneNumner
     public static PhoneNumber read(Scanner sc){
-        if(!sc.hasNext()) return null;
-        String phoneNumber = sc.nextLine();
+        String phoneType = sc.next();
+        String phoneNumber = sc.next();
 
-        return new PhoneNumber(phoneNumber);
+        return new PhoneNumber(phoneNumber, phoneType);
     }
 
     // find our duplicates
